@@ -55,6 +55,16 @@ class Buzzer:
             self.changeFreq(note)
             time.sleep(noteDurationList[index])
 
+class Pump:
+    def __init__(self):
+        self.pumpPin = 40 # GPIO 21
+        self.pumpOn = True
+        GPIO.setup(self.pumpPin, GPIO.OUT)
+    def switchPump(self):
+        self.pumpOn = self.pumpOn if False else True
+        GPIO.output(self.pumpPin, self.pumpOn if GPIO.LOW else GPIO.HIGH)
+    def getState(self):
+        return self.pumpOn
 
 
 def destroy():
@@ -66,8 +76,12 @@ if __name__ == '__main__':
         StepperThread = Thread(target=MyStepper.slap)
         StepperThread.start() #starts
         MyBuzzer = Buzzer()
-        BuzzerThread = Thread(target=MyBuzzer.play)
+        BuzzerThread = Thread(target=MyBuzzer.play, args=([500,600,700], [1,1,1],))
         BuzzerThread.start() #starts
+        MyPump = Pump()
+        MyPump.switchPump()
+        time.sleep(5)
+        MyPump.switchPump()
         #todo
     except KeyboardInterrupt: 
         destroy()
