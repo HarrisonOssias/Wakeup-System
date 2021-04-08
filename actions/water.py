@@ -22,5 +22,4 @@ if __name__ == '__main__':
 
     pump.switchPump()
     time.sleep(3)
-    print(pump.getState())
  
