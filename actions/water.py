@@ -12,7 +12,6 @@ class Pump:
         GPIO.output(self.pumpPin, GPIO.HIGH)
         time.sleep(0.5)
         GPIO.output(self.pumpPin, GPIO.LOW)
-
     def getState(self):
         return self.pumpOn
 
