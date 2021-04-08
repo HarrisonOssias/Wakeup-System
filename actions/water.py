@@ -21,4 +21,4 @@ if __name__ == '__main__':
     time.sleep(3)
     print(pump.getState)
     pump.switchPump
-    pritn(pump.getState)    
+    print(pump.getState)    
