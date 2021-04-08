@@ -7,14 +7,14 @@ from dotenv import dotenv_values #must be using .env file to store twitter API k
 
 
 # Setup callbacks from Twython Streamer
-class BlinkyStreamer(TwythonStreamer):
+class TwitterStream(TwythonStreamer):
     def __init__(self, consumer_key, consumer_secret, token, token_secret, tqueue):
         self.tweet_queue = tqueue
         super(TwitterStream, self).__init__(consumer_key, consumer_secret, token, token_secret)
 
     def on_success(self, data):
         if 'text' in data:
-            self.tweet_queue.append(data)
+            self.tweet_queue.append(data['text'])
 
     def on_error(self, status_code, data):
         print(status_code)
@@ -22,22 +22,25 @@ class BlinkyStreamer(TwythonStreamer):
         # Uncomment the next line!
         # self.disconnect()
 
-TERMS = "HOSSIAS"               
+              
                 
 config = dotenv_values(".env") #get keys from .env file and store in dictionary  
 
 def stream_tweets(tweets_queue):
-
+  
     try:
-        stream = BlinkyStreamer(config["APP_KEY"], config["APP_SECRET"], config["OAUTH_TOKEN"], config["OAUTH_TOKEN_SECRET"])
+        stream = TwitterStream(config["APP_KEY"], config["APP_SECRET"], config["OAUTH_TOKEN"], config["OAUTH_TOKEN_SECRET"], tweets_queue)
+        #stream = BlinkyStreamer(config["APP_KEY"], config["APP_SECRET"], config["OAUTH_TOKEN"], config["OAUTH_TOKEN_SECRET"])
 
         # You can filter on keywords, or simply draw from the sample stream
-        #stream.statuses.filter(track='twitter', language='en')
-        stream.statuses.sample(track=TERMS)
+        stream.statuses.filter(track="@HarrisonOssias,#SLAP323,#WATER323,#ALARM323")
+       
     except ChunkedEncodingError:
         # Sometimes the API sends back one byte less than expected which results in an exception in the
         # current version of the requests library
         stream_tweets(tweet_queue)
+    
+    time.sleep(0.5)
 
         
             
@@ -53,5 +56,5 @@ if __name__ == '__main__':
 
     tweet_stream = Thread(target=stream_tweets, args=(tweet_queue,), daemon=True)
     tweet_stream.start()
-
-    process_tweets(tweet_queue)
+    tweet_process = Thread(target=process_tweets, args=(tweet_queue,))
+    tweet_process.start()
