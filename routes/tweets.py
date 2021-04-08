@@ -18,7 +18,7 @@ class BlinkyStreamer(TwythonStreamer):
         # Uncomment the next line!
         # self.disconnect()
 
- TERMS = "HOSSIAS"               
+TERMS = "HOSSIAS"               
                 
 config = dotenv_values(".env") #get keys from .env file and store in dictionary  
 
