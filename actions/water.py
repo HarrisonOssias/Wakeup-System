@@ -9,6 +9,9 @@ class Pump:
         GPIO.setup(self.pumpPin, GPIO.OUT)
     def switchPump(self):
         self.pumpOn = self.pumpOn if False else True
-        GPIO.output(self.pumpPin, self.pumpOn if GPIO.LOW else GPIO.HIGH)
+        GPIO.output(self.pumpPin, GPIO.HIGH)
+        time.sleep(0.5)
+        GPIO.output(self.pumpPin, GPIO.LOW)
+
     def getState(self):
         return self.pumpOn
