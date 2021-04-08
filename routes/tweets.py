@@ -67,7 +67,6 @@ def process_tweets(tweets_queue):
                 LEDThread.start()
 
 def start():
-if __name__ == '__main__':
 
     tweet_queue = deque()
 
