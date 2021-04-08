@@ -37,21 +37,3 @@ class Stepper:
             time.sleep(0.5)
         self.motorStop()
 
-
-
-
-
-def destroy():
-    GPIO.cleanup()
-
-if __name__ == '__main__':
-    try: 
-        MyStepper = Stepper()
-        StepperThread = Thread(target=MyStepper.slap)
-        StepperThread.start() #starts
-        MyBuzzer = Buzzer()
-        BuzzerThread = Thread(target=MyBuzzer.play, args=([10,100,1000,1000,500], [1,1,3,1,1]))
-        BuzzerThread.start() #starts
-        #todo
-    except KeyboardInterrupt: 
-        destroy()

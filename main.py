@@ -5,6 +5,7 @@ import threading
 #from actions.slapper import Stepper
 from routes.tweets import BlinkyStreamer
 from dotenv import dotenv_values #must be using .env file to store twitter API keys
+from .routes.tweets import start
 
 config = dotenv_values(".env") #get keys from .env file and store in dictionary  
 
@@ -16,11 +17,10 @@ TERMS = '#HOssias'
 #GPIO.setup(LED, GPIO.OUT)
 #GPIO.output(LED, GPIO.LOW)
 
-
-# Create streamer
-try:
-    stream = BlinkyStreamer(config["APP_KEY"], config["APP_SECRET"], config["OAUTH_TOKEN"], config["OAUTH_TOKEN_SECRET"])
-    
-    stream.statuses.filter(track=TERMS)
-except KeyboardInterrupt:
-    GPIO.cleanup()
+if __name__ == '__main__':
+    try:
+        #stream = BlinkyStreamer(config["APP_KEY"], config["APP_SECRET"], config["OAUTH_TOKEN"], config["OAUTH_TOKEN_SECRET"])
+        #stream.statuses.filter(track=TERMS)
+        start()
+    except KeyboardInterrupt:
+        GPIO.cleanup()

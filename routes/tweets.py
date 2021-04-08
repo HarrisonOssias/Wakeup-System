@@ -4,9 +4,9 @@ from collections import deque
 from requests.exceptions import ChunkedEncodingError
 import time
 from dotenv import dotenv_values #must be using .env file to store twitter API keys
-from ../action/alarm import Buzzer
-from ../action/slapper import Stepper
-from ../action/water import Pump
+from ..action.alarm import Buzzer
+from ..action.slapper import Stepper
+from ..action.light import Light
 
 
 # Setup callbacks from Twython Streamer
@@ -61,13 +61,12 @@ def process_tweets(tweets_queue):
                 MyBuzzer = Buzzer()
                 BuzzerThread = Thread(target=MyBuzzer.play, args=([500,600,700], [1,1,1],))
                 BuzzerThread.start()
-            else if action.lower() == "water":
-                MyPump = Pump()
-                MyPump.switchPump()
-                time.sleep(5)
-                MyPump.switchPump()
+            else if action.lower() == "light":
+                MyLED = Light()
+                LEDThread = Thread(target=MyLED.run)
+                LEDThread.start()
 
-
+def start():
 if __name__ == '__main__':
 
     tweet_queue = deque()
