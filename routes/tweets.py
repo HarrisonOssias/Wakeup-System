@@ -1,6 +1,10 @@
 from twython import TwythonStreamer
+from threading import Thread
 from collections import deque   
 from requests.exceptions import ChunkedEncodingError
+import time
+from dotenv import dotenv_values #must be using .env file to store twitter API keys
+
 
 # Setup callbacks from Twython Streamer
 class BlinkyStreamer(TwythonStreamer):
