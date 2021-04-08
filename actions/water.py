@@ -4,7 +4,7 @@ import time
 
 class Pump:
     def __init__(self):
-        self.pumpPin = 40 # GPIO 21
+        self.pumpPin = 36 # GPIO 16
         self.pumpOn = True
         GPIO.setup(self.pumpPin, GPIO.OUT)
     def switchPump(self):
@@ -12,3 +12,13 @@ class Pump:
         GPIO.output(self.pumpPin, self.pumpOn if GPIO.LOW else GPIO.HIGH)
     def getState(self):
         return self.pumpOn
+
+
+if __name__ == '__main__':
+    pump = Pump()
+
+    pump.switchPump
+    time.sleep(3)
+    print(pump.getState)
+    pump.switchPump
+    pritn(pump.getState)    
