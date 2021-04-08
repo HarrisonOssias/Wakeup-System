@@ -17,8 +17,8 @@ class Pump:
 if __name__ == '__main__':
     pump = Pump()
 
-    pump.switchPump
+    pump.switchPump()
     time.sleep(3)
-    print(pump.getState)
-    pump.switchPump
-    print(pump.getState)    
+    print(pump.getState())
+    pump.switchPump()
+    print(pump.getState())    
