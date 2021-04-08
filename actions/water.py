@@ -5,10 +5,13 @@ GPIO.setmode(GPIO.BOARD)
 class Pump:
     def __init__(self):
         self.pumpPin = 36 # GPIO 16
-        self.pumpOn = True
+        self.pumpOn = False
         GPIO.setup(self.pumpPin, GPIO.OUT)
     def switchPump(self):
-        self.pumpOn = self.pumpOn if False else True
+        if (self.pumpOn == True):
+            self.pumpOn = False
+        else:
+            self.pumpOn = True
         GPIO.output(self.pumpPin, GPIO.HIGH)
         time.sleep(0.5)
         GPIO.output(self.pumpPin, GPIO.LOW)
