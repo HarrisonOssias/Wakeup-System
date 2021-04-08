@@ -1,7 +1,7 @@
 import RPi.GPIO as GPIO
 import time
 
-
+GPIO.setmode(GPIO.BOARD)
 class Pump:
     def __init__(self):
         self.pumpPin = 36 # GPIO 16
