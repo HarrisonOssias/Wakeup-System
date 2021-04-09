@@ -4,9 +4,10 @@ from collections import deque
 from requests.exceptions import ChunkedEncodingError
 import time
 from dotenv import dotenv_values #must be using .env file to store twitter API keys
-from .actions.alarm import *
-from .actions.slapper import *
-from .actions.light import *
+from actions.alarm import *
+from actions.slapper import *
+from actions.light import *
+
 
 # Setup callbacks from Twython Streamer
 class TwitterStream(TwythonStreamer):
