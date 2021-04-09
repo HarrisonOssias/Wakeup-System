@@ -4,9 +4,7 @@ from collections import deque
 from requests.exceptions import ChunkedEncodingError
 import time
 from dotenv import dotenv_values #must be using .env file to store twitter API keys
-from ..action.alarm import Buzzer
-from ..action.slapper import Stepper
-from ..action.light import Light
+
 
 
 # Setup callbacks from Twython Streamer
@@ -25,8 +23,7 @@ class TwitterStream(TwythonStreamer):
         # Uncomment the next line!
         # self.disconnect()
 
-              
-                
+
 config = dotenv_values(".env") #get keys from .env file and store in dictionary  
 
 def stream_tweets(tweets_queue):
@@ -44,8 +41,6 @@ def stream_tweets(tweets_queue):
         stream_tweets(tweet_queue)
     
     time.sleep(0.5)
-
-        
             
 def process_tweets(tweets_queue):
     while True:
@@ -53,24 +48,22 @@ def process_tweets(tweets_queue):
             #  Do something with the tweets
             action = tweets_queue.popleft()
             print(action)
-            if action.lower() == "slap":
-                MyStepper = Stepper()
-                StepperThread = Thread(target=MyStepper.slap)
-                StepperThread.start()
-            else if action.lower() == "alarm":
-                MyBuzzer = Buzzer()
-                BuzzerThread = Thread(target=MyBuzzer.play, args=([500,600,700], [1,1,1],))
-                BuzzerThread.start()
-            else if action.lower() == "light":
-                MyLED = Light()
-                LEDThread = Thread(target=MyLED.run)
-                LEDThread.start()
+            if ("SLAP323" in action):
+                print('slap')
+            elif ("ALARM323" in action):
+                print('alarm')
+            elif ("WATER323" in action):
+                print('water')
+            else:
+                print('no action')
 
-def start():
 
-    tweet_queue = deque()
+class Start_tweets():
 
-    tweet_stream = Thread(target=stream_tweets, args=(tweet_queue,), daemon=True)
-    tweet_stream.start()
-    tweet_process = Thread(target=process_tweets, args=(tweet_queue,))
-    tweet_process.start()
+        def __init__(self):
+            self.tweet_queue = deque()
+            tweet_stream = Thread(target=stream_tweets, args=(self.tweet_queue,), daemon=True)
+            tweet_stream.start()
+            tweet_process = Thread(target=process_tweets, args=(self.tweet_queue,))
+            tweet_process.start()
+    

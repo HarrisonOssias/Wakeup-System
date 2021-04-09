@@ -1,0 +1,7 @@
+from alarm import Buzzer
+from light import Light
+from slapper import Stepper
+
+Alarm = alarm.Buzzer()
+Water = light.Light()
+Slap = slapper.Stepper()

@@ -4,7 +4,7 @@ import time
 GPIO.setmode(GPIO.BCM)
 class Light:
     def __init__(self):
-        self.ledPin = 21 # GPIO 16
+        self.ledPin = 19 # GPIO 19
         GPIO.setup(self.ledPin, GPIO.OUT)
         GPIO.output(self.pumpPin, GPIO.LOW)
     def turnOn(self):
