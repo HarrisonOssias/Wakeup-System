@@ -9,6 +9,7 @@ from dotenv import dotenv_values
 from actions.alarm import *
 from actions.slapper import *
 from actions.light import *
+from actions.button import *
 
 GPIO.setwarnings(False)
 # Setup callbacks from Twython Streamer
@@ -61,7 +62,8 @@ def process_tweets(tweets_queue):
     MyBuzzer = Buzzer()
     #initialize pump
     MyLED = Light()
-
+    MyButton = Button()
+    MyButton.listen()
     time.sleep(3)
    
     
@@ -74,7 +76,7 @@ def process_tweets(tweets_queue):
 
             if "SLAP323" in action:
                 MyStepper.slap()
-                 
+                
             elif "ALARM323" in action:
                 MyBuzzer.play([0.1, 0.1, 0.1 , 1, 0.1])
             
