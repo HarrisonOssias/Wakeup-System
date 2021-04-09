@@ -57,6 +57,7 @@ def process_tweets(tweets_queue):
     MyBuzzer = Buzzer()
     MyLED = Light()
     while True:
+        GPIO.setmode(GPIO.BOARD)
         if len(tweets_queue) > 0:
             #  Do something with the tweets
             action = tweets_queue.popleft()
@@ -77,7 +78,7 @@ def process_tweets(tweets_queue):
 
                 LEDThread = Thread(target=MyLED.run)
                 LEDThread.start()
-
+        GPIO.cleanup()
 
 class Start_tweets():
 
