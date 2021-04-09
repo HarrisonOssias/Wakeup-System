@@ -74,14 +74,13 @@ def process_tweets(tweets_queue):
             print(action)
 
             if "SLAP323" in action:
-                MyLED.run()
+                MyStepper.slap()
                  
             elif "ALARM323" in action:
                 MyBuzzer.play([500, 600, 700], [1, 1, 1])
             
-
             elif "WATER323" in action:
-                MyStepper.slap()
+                MyLED.run()
                 
 
 class Start_tweets():
