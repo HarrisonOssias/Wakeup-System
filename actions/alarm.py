@@ -8,7 +8,7 @@ class Buzzer:
         GPIO.setup(self.buzzerPin, GPIO.OUT) 
         self.pwm = GPIO.PWM(self.buzzerPin, 500) # 500 default freq
     def startBuzzer(self):
-        self.pwm.start(50) # 50% duty cycle
+        self.pwm.start(90) # 50% duty cycle
     def stopBuzzer(self):
         self.pwm.stop()
     def changeFreq(self, freq):
@@ -16,7 +16,7 @@ class Buzzer:
     def play(self, noteList, noteDurationList):
         GPIO.setmode(GPIO.BOARD)
         GPIO.setup(self.buzzerPin, GPIO.OUT) 
-        self.pwm.start(50)
+        self.pwm.start(90)
         for index, note in enumerate(noteList):
             self.changeFreq(note)
             time.sleep(noteDurationList[index])
