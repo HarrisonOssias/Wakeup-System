@@ -37,5 +37,4 @@ class Stepper:
             time.sleep(0.5)
         self.motorStop()
         GPIO.cleanup()
-        return(0)
 

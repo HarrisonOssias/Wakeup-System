@@ -57,8 +57,6 @@ def stream_tweets(tweets_queue):
 def process_tweets(tweets_queue):
     #initialize slapping
     MyStepper = Stepper()
-    
-
     #initialize alarm
     MyBuzzer = Buzzer()
     

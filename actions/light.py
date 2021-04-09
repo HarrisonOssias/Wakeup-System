@@ -15,4 +15,3 @@ class Light:
         time.sleep(5)
         self.turnOff()
         GPIO.cleanup()
-        return(0)
