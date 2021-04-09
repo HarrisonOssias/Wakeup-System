@@ -5,7 +5,7 @@ import threading
 #from actions.slapper import Stepper
 #from routes.tweets import BlinkyStreamer
 from dotenv import dotenv_values #must be using .env file to store twitter API keys
-from routes.tweets import *
+from tweets import *
 
 
 

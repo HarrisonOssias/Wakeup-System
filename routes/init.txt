@@ -1,5 +1,0 @@
-from routes.tweets import Start_tweets
-from routes.tweets_test import Start_tweets
-
-Test_start = Start_tweets()
-Start = Start_tweets()
