@@ -78,7 +78,6 @@ def process_tweets(tweets_queue):
 
                 LEDThread = Thread(target=MyLED.run)
                 LEDThread.start()
-        GPIO.cleanup()
 
 class Start_tweets():
 
