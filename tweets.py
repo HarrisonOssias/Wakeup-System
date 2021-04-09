@@ -76,21 +76,21 @@ def process_tweets(tweets_queue):
             print(action)
 
             if "SLAP323" in action:
-                if (!StepperThread.is_alive()):
+                if not StepperThread.is_alive():
                     StepperThread.start()
                 else:
                     print('slap thread busy')
                 
 
             elif "ALARM323" in action:
-                if (!BuzzerThread.is_alive()):
+                if not BuzzerThread.is_alive():
                     BuzzerThread.start()
                 else:
                     print('alarm thread busy')
             
 
             elif "WATER323" in action:
-            if (!LEDThread.is_alive()):
+                if not LEDThread.is_alive():
                     LEDThread.start()
                 else:
                     print('light thread busy')
