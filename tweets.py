@@ -57,16 +57,14 @@ def stream_tweets(tweets_queue):
 def process_tweets(tweets_queue):
     #initialize slapping
     MyStepper = Stepper()
-    StepperThread = Thread(target=MyStepper.slap, daemon=True)
+    
 
     #initialize alarm
     MyBuzzer = Buzzer()
-    BuzzerThread = Thread(target=MyBuzzer.play, args=(
-    [500, 600, 700], [1, 1, 1],), daemon=True)
-
+    
     #initialize pump
     MyLED = Light()
-    LEDThread = Thread(target=MyLED.run, daemon=True)
+   
     
     while True:
         GPIO.setmode(GPIO.BOARD)
@@ -76,24 +74,14 @@ def process_tweets(tweets_queue):
             print(action)
 
             if "SLAP323" in action:
-                if not StepperThread.is_alive():
-                    StepperThread.start()
-                else:
-                    print('slap thread busy')
-                
-
+                MyLED.run()
+                 
             elif "ALARM323" in action:
-                if not BuzzerThread.is_alive():
-                    BuzzerThread.start()
-                else:
-                    print('alarm thread busy')
+                MyBuzzer.play([500, 600, 700], [1, 1, 1])
             
 
             elif "WATER323" in action:
-                if not LEDThread.is_alive():
-                    LEDThread.start()
-                else:
-                    print('light thread busy')
+                MyStepper.slap()
                 
 
 class Start_tweets():
