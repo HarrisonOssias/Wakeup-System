@@ -3,22 +3,15 @@ import time
 
 class Buzzer:
     def __init__(self):
-        GPIO.setmode(GPIO.BOARD)
-        self.buzzerPin = 32    # GPIO 12, PWM0
-        GPIO.setup(self.buzzerPin, GPIO.OUT) 
-        self.pwm = GPIO.PWM(self.buzzerPin, 500) # 500 default freq
-    def startBuzzer(self):
-        self.pwm.start(90) # 50% duty cycle
-    def stopBuzzer(self):
-        self.pwm.stop()
-    def changeFreq(self, freq):
-        self.pwm.ChangeFrequency(freq)
-    def play(self, noteList, noteDurationList):
+        self.buzzerPin = 11    # GPIO 17
+    def play(self, rythm):
         GPIO.setmode(GPIO.BOARD)
         GPIO.setup(self.buzzerPin, GPIO.OUT) 
-        self.pwm.start(90)
-        for index, note in enumerate(noteList):
-            self.changeFreq(note)
-            time.sleep(noteDurationList[index])
-
+        for i in rythm:
+            GPIO.output(self.buzzerPin,GPIO.HIGH)
+            print ("Beep")
+            time.sleep(i) # Delay in seconds
+            GPIO.output(self.buzzerPin,GPIO.LOW)
+            print ("No Beep")
+            time.sleep(i)
         GPIO.cleanup()
