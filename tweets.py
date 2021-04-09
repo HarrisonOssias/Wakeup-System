@@ -78,13 +78,19 @@ def process_tweets(tweets_queue):
             if "SLAP323" in action:
 
                 StepperThread.start()
+                time.sleep(4)
+                StepperThread.stop()
 
             elif "ALARM323" in action:
 
                 BuzzerThread.start()
+                time.sleep(4)
+                BuzzerThread.stop()
 
             elif "WATER323" in action:
                 LEDThread.start()
+                time.sleep(4)
+                BuzzerThread.stop()
 
 class Start_tweets():
 
