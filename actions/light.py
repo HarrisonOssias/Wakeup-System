@@ -3,7 +3,7 @@ import time
 
 class Light:
     def __init__(self):
-        self.pumpPin = 35 # GPIO 19
+        self.pumpPin = 33# GPIO 19
     def turnOn(self):
         GPIO.output(self.pumpPin, GPIO.HIGH)
     def turnOff(self):
