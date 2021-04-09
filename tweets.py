@@ -59,9 +59,10 @@ def process_tweets(tweets_queue):
     MyStepper = Stepper()
     #initialize alarm
     MyBuzzer = Buzzer()
-    
     #initialize pump
     MyLED = Light()
+
+    time.sleep(3)
    
     
     while True:
