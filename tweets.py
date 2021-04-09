@@ -10,8 +10,10 @@ from actions.alarm import *
 from actions.slapper import *
 from actions.light import *
 
-GPIO.setwarnings(False) 
+GPIO.setwarnings(False)
 # Setup callbacks from Twython Streamer
+
+
 class TwitterStream(TwythonStreamer):
     def __init__(self, consumer_key, consumer_secret, token, token_secret, tqueue):
         self.tweet_queue = tqueue
@@ -53,9 +55,19 @@ def stream_tweets(tweets_queue):
 
 
 def process_tweets(tweets_queue):
+    // initialize slapping
     MyStepper = Stepper()
+    StepperThread = Thread(target=MyStepper.slap)
+
+    // initialize alarm
     MyBuzzer = Buzzer()
+    BuzzerThread = Thread(target=MyBuzzer.play, args=(
+    [500, 600, 700], [1, 1, 1],))
+
+    // initialize pump
     MyLED = Light()
+    LEDThread = Thread(target=MyLED.run)
+    
     while True:
         GPIO.setmode(GPIO.BOARD)
         if len(tweets_queue) > 0:
@@ -65,18 +77,13 @@ def process_tweets(tweets_queue):
 
             if "SLAP323" in action:
 
-                StepperThread = Thread(target=MyStepper.slap)
                 StepperThread.start()
 
             elif "ALARM323" in action:
 
-                BuzzerThread = Thread(target=MyBuzzer.play, args=(
-                    [500, 600, 700], [1, 1, 1],))
                 BuzzerThread.start()
 
             elif "WATER323" in action:
-
-                LEDThread = Thread(target=MyLED.run)
                 LEDThread.start()
 
 class Start_tweets():
