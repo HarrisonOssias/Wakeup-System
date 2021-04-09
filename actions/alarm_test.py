@@ -1,25 +1,18 @@
+#Libraries
 import RPi.GPIO as GPIO
-import time
-
-class Buzzer:
-    def __init__(self):
-        GPIO.setmode(GPIO.BOARD)
-        self.buzzerPin = 36    # GPIO 16, PWM0
-        GPIO.setup(self.buzzerPin, GPIO.OUT) 
-    def startBuzzer(self):
-        GPIO.output(self.buzzerPin, GPIO.HIGH)
-    def stopBuzzer(self):
-        GPIO.output(self.buzzerPin, GPIO.LOW)
-    def play(self):
-        GPIO.setmode(GPIO.BOARD)
-        GPIO.setup(self.buzzerPin, GPIO.OUT) 
-        for i in range(6):
-            self.startBuzzer()
-            time.sleep(0.5)
-            self.stopBuzzer()
-            time.sleep(0.5)
-
-        GPIO.cleanup()
-
-buz = Buzzer()
-buz.play()
+from time import sleep
+#Disable warnings (optional)
+GPIO.setwarnings(False)
+#Select GPIO mode
+GPIO.setmode(GPIO.BCM)
+#Set buzzer - pin 23 as output
+buzzer=17
+GPIO.setup(buzzer,GPIO.OUT)
+#Run forever loop
+while True:
+    GPIO.output(buzzer,GPIO.HIGH)
+    print ("Beep")
+    sleep(0.5) # Delay in seconds
+    GPIO.output(buzzer,GPIO.LOW)
+    print ("No Beep")
+    sleep(0.5)
