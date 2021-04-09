@@ -1,10 +1,11 @@
 import RPi.GPIO as GPIO
 import time
 
-GPIO.setmode(GPIO.BCM)
+
 class Light:
     def __init__(self):
-        self.ledPin = 19 # GPIO 19
+        GPIO.setmode(GPIO.BOARD)
+        self.ledPin = 35 # GPIO 19
         GPIO.setup(self.ledPin, GPIO.OUT)
         GPIO.output(self.pumpPin, GPIO.LOW)
     def turnOn(self):
@@ -15,3 +16,4 @@ class Light:
         self.turnOn()
         time.sleep(5)
         self.turnOff()
+        GPIO.cleanup()

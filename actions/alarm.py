@@ -3,6 +3,7 @@ import time
 
 class Buzzer:
     def __init__(self):
+        GPIO.setmode(GPIO.BOARD)
         self.buzzerPin = 32    # GPIO 12, PWM0
         GPIO.setup(self.buzzerPin, GPIO.OUT) 
         self.pwm = GPIO.PWM(self.buzzerPin, 500) # 500 default freq
@@ -17,3 +18,5 @@ class Buzzer:
         for index, note in enumerate(noteList):
             self.changeFreq(note)
             time.sleep(noteDurationList[index])
+
+        GPIO.cleanup()

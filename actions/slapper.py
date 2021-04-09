@@ -4,10 +4,10 @@ import time
 
 class Stepper:
     def __init__(self):
+        GPIO.setmode(GPIO.BOARD)
         self.motorPins = (12, 16, 18, 22)
         self.CCWStep = (0x01, 0x02, 0x04, 0x08)
         self.CWStep = (0x08, 0x04, 0x02, 0x01)
-        GPIO.setmode(GPIO.BOARD)
         for pin in self.motorPins:
             GPIO.setup(pin, GPIO.OUT)
     def moveOnePeriod(self, direction, ms):
@@ -36,4 +36,5 @@ class Stepper:
             self.moveSteps(0,3,128)
             time.sleep(0.5)
         self.motorStop()
+        GPIO.cleanup()
 
