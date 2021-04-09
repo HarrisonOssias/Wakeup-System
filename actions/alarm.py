@@ -4,6 +4,7 @@ import time
 class Buzzer:
     def __init__(self):
         GPIO.setmode(GPIO.BOARD)
+        GPIO.setup(self.buzzerPin, GPIO.OUT) 
         self.buzzerPin = 32    # GPIO 12, PWM0
         self.pwm = GPIO.PWM(self.buzzerPin, 500) # 500 default freq
     def startBuzzer(self):
