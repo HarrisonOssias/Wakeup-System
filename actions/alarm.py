@@ -20,4 +20,4 @@ class Buzzer:
             time.sleep(noteDurationList[index])
 
         GPIO.cleanup()
-        
+        return(0)
