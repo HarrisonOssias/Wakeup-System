@@ -55,16 +55,16 @@ def stream_tweets(tweets_queue):
 
 
 def process_tweets(tweets_queue):
-    // initialize slapping
+    #initialize slapping
     MyStepper = Stepper()
     StepperThread = Thread(target=MyStepper.slap)
 
-    // initialize alarm
+    #initialize alarm
     MyBuzzer = Buzzer()
     BuzzerThread = Thread(target=MyBuzzer.play, args=(
     [500, 600, 700], [1, 1, 1],))
 
-    // initialize pump
+    #initialize pump
     MyLED = Light()
     LEDThread = Thread(target=MyLED.run)
     
