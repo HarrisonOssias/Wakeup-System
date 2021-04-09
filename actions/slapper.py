@@ -4,12 +4,9 @@ import time
 
 class Stepper:
     def __init__(self):
-        GPIO.setmode(GPIO.BOARD)
         self.motorPins = (12, 16, 18, 22)
         self.CCWStep = (0x01, 0x02, 0x04, 0x08)
         self.CWStep = (0x08, 0x04, 0x02, 0x01)
-        for pin in self.motorPins:
-            GPIO.setup(pin, GPIO.OUT)
     def moveOnePeriod(self, direction, ms):
         for j in range(0, 4, 1):
             for i in range(0, 4, 1):
@@ -30,6 +27,9 @@ class Stepper:
             GPIO.output(self.motorPins[i],GPIO.LOW)
 
     def slap(self):
+        GPIO.setmode(GPIO.BOARD)
+        for pin in self.motorPins:
+            GPIO.setup(pin, GPIO.OUT)
         for i in range(0, 3, 1):
             self.moveSteps(1,3,128) #512 = 360deg, 1=cw, 0=ccw
             time.sleep(0.5)
