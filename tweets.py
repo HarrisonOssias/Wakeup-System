@@ -2,6 +2,7 @@ from twython import TwythonStreamer
 from threading import Thread
 from collections import deque   
 from requests.exceptions import ChunkedEncodingError
+import RPi.GPIO as GPIO
 import time
 from dotenv import dotenv_values #must be using .env file to store twitter API keys
 from actions.alarm import *
@@ -49,18 +50,22 @@ def process_tweets(tweets_queue):
             #  Do something with the tweets
             action = tweets_queue.popleft()
             print(action)
+            GPIO.cleanup()
             if "SLAP323" in action:
                 MyStepper = Stepper()
                 StepperThread = Thread(target=MyStepper.slap)
                 StepperThread.start()
+                GPIO.cleanup()
             elif "ALARM323" in action:
                 MyBuzzer = Buzzer()
                 BuzzerThread = Thread(target=MyBuzzer.play, args=([500,600,700], [1,1,1],))
                 BuzzerThread.start()
+                GPIO.cleanup()
             elif "WATER323" in action:
                 MyLED = Light()
                 LEDThread = Thread(target=MyLED.run)
                 LEDThread.start()
+                GPIO.cleanup()
 
 class Start_tweets():
 
