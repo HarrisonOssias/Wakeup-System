@@ -10,7 +10,7 @@ from actions.alarm import *
 from actions.slapper import *
 from actions.light import *
 
-
+GPIO.setwarnings(False) 
 # Setup callbacks from Twython Streamer
 class TwitterStream(TwythonStreamer):
     def __init__(self, consumer_key, consumer_secret, token, token_secret, tqueue):
